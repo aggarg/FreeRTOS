@@ -18,7 +18,7 @@ suggested name for the directory is `<hardware_name>_<compiler_name>`.
 
 1. Compile the following additional files in your project:
    * All files in the `FreeRTOS/Demo/Common/Minimal` directory except
-     `comtest_strings.c`, `crhook.c` and `sp_flop.c`.
+     `comtest_strings.c`, `crhook.c` , `comtest.c` ,`crflash.c`,`flash.c`, `flash_timer.c` and `sp_flop.c`.
 2. Add the following paths to your include search path:
    * `FreeRTOS/Demo/Common/include`.
 3. Call the `void vStartTests( void )` function from your `main` function after
