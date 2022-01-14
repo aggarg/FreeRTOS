@@ -16,17 +16,19 @@ SECTIONS
 		KEEP (*(SORT_NONE(.init)))
 	} >rom AT>rom
 	
+    .trap_vectors : ALIGN(8) {
+        *(.text.freertos_risc_v_trap_handler)
+        *(.text.freertos_risc_v_exception_handler)
+        *(.text.freertos_risc_v_interrupt_handler)
+        *(.text.freertos_risc_v_mtimer_interrupt_handler)
+    } >rom AT>rom
+
 	.text :
 	{
 		*(.text.unlikely .text.unlikely.*)
 		*(.text.startup .text.startup.*)
 		*(.text .text.*)
 		*(.gnu.linkonce.t.*)
-		. = ALIGN(8);
-        KEEP (*(.freertos_risc_v_trap_handler))
-        KEEP (*(.freertos_risc_v_exception_handler))
-        KEEP (*(.freertos_risc_v_interrupt_handler))
-        KEEP (*(.freertos_risc_v_mtimer_tick_interrupt_handler))
 	} >rom AT>rom
 	
 	.fini :

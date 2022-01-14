@@ -18,7 +18,7 @@ IRQ_5:
 IRQ_6:
         j freertos_risc_v_interrupt_handler
 IRQ_7:
-        j freertos_risc_v_mtimer_tick_interrupt_handler
+        j freertos_risc_v_mtimer_interrupt_handler
 IRQ_8:
         j freertos_risc_v_interrupt_handler
 IRQ_9:

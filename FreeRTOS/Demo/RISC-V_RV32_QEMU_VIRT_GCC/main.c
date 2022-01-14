@@ -82,6 +82,9 @@ required UART registers. */
 #define mainPLIC_ENABLE_0  ( * ( ( volatile uint32_t * ) 0x0C002000UL ) )
 #define mainPLIC_ENABLE_1  ( * ( ( volatile uint32_t * ) 0x0C002004UL ) )
 
+extern void freertos_risc_v_trap_handler( void );
+extern void freertos_vector_table( void );
+
 /*
  * main_blinky() is used when mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is set to 1.
  * main_full() is used when mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is set to 0.
@@ -103,15 +106,15 @@ void main( void )
 	/* See https://www.freertos.org/freertos-on-qemu-mps2-an385-model.html for
 	instructions. */
 
-#if mainVECTOR_MODE_DIRECT == 1
-	extern void *__metal_vector_table;
-	extern void freertos_interrupt_set_vector_mode( void *);
-	freertos_interrupt_set_vector_mode(&__metal_vector_table);
-#else
-    extern void freertos_risc_v_trap_handler( void );
-    extern void freertos_interrupt_set_direct_mode( void * );
-	freertos_interrupt_set_direct_mode(&freertos_risc_v_trap_handler);
-#endif
+	#if( mainVECTOR_MODE_DIRECT == 1 )
+	{
+		__asm__ volatile( "csrw mtvec, %0" :: "r"( freertos_risc_v_trap_handler ) );
+	}
+	#else
+	{
+		__asm__ volatile( "csrw mtvec, %0" :: "r"( ( uintptr_t )freertos_vector_table | 0x1 ) );
+	}
+	#endif
 
 	/* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
 	of this file. */
