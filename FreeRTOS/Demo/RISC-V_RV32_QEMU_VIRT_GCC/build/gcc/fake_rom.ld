@@ -22,6 +22,11 @@ SECTIONS
 		*(.text.startup .text.startup.*)
 		*(.text .text.*)
 		*(.gnu.linkonce.t.*)
+		. = ALIGN(8);
+        KEEP (*(.freertos_risc_v_trap_handler))
+        KEEP (*(.freertos_risc_v_exception_handler))
+        KEEP (*(.freertos_risc_v_interrupt_handler))
+        KEEP (*(.freertos_risc_v_mtimer_tick_interrupt_handler))
 	} >rom AT>rom
 	
 	.fini :

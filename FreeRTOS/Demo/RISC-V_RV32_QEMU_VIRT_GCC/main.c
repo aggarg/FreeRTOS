@@ -103,6 +103,16 @@ void main( void )
 	/* See https://www.freertos.org/freertos-on-qemu-mps2-an385-model.html for
 	instructions. */
 
+#if mainVECTOR_MODE_DIRECT == 1
+	extern void *__metal_vector_table;
+	extern void freertos_interrupt_set_vector_mode( void *);
+	freertos_interrupt_set_vector_mode(&__metal_vector_table);
+#else
+    extern void freertos_risc_v_trap_handler( void );
+    extern void freertos_interrupt_set_direct_mode( void * );
+	freertos_interrupt_set_direct_mode(&freertos_risc_v_trap_handler);
+#endif
+
 	/* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
 	of this file. */
 	#if ( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 1 )
