@@ -122,6 +122,6 @@ machine on which the test is developed). */
 #define bktPRIMARY_PRIORITY		( configMAX_PRIORITIES - 4 )
 #define bktSECONDARY_PRIORITY	( configMAX_PRIORITIES - 5 )
 
-#define mainVECTOR_MODE_DIRECT                  1
+#define mainVECTOR_MODE_DIRECT                  0
 
 #endif /* FREERTOS_CONFIG_H */

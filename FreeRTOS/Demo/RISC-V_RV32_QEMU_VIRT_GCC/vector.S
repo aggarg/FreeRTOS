@@ -1,8 +1,8 @@
 
 .balign 128, 0
 .option norvc
-.global __metal_vector_table
-__metal_vector_table:
+.global freertos_vector_table
+freertos_vector_table:
 IRQ_0:
         j freertos_risc_v_exception_handler
 IRQ_1:
