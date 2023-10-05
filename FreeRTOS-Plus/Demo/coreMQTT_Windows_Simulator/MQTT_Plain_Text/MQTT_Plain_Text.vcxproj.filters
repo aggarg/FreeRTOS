@@ -72,6 +72,9 @@
     <ClCompile Include="..\..\..\Source\Application-Protocols\network_transport\transport_plaintext.c">
       <Filter>Additional Network Transport Files\PlaintextTransport</Filter>
     </ClCompile>
+    <ClCompile Include="DemoTasks\app_1.c">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\core_mqtt_config.h">
